@@ -25,6 +25,7 @@ id_Produto = 3
 
 
 def buscarProduto():
+    '''Busca um produto pelo id e retorna o produto encontrado ou False caso não encontre'''
     busca = input("Digite o id do produto que deseja buscar/alterar: ")
     try:
         busca = int(busca)
@@ -39,6 +40,7 @@ def buscarProduto():
 
 
 def listarProdutos(produtos):
+    '''Lista os produtos disponiveis'''
     if len(produtos) == 0:
         print("Não temos produtos na lista")
     for k, v in produtos.items():
@@ -46,6 +48,8 @@ def listarProdutos(produtos):
 
 
 def adicionarProduto():
+    '''Adiciona um produto a fornecido pelo usuario na lista de produtos
+    , caso o produto já exista ele atualiza o estoque para True'''
     global id_Produto
     nome = input("Digite o nome do produto: ")
     for e in produtos.values():
@@ -63,6 +67,7 @@ def adicionarProduto():
 
 
 def verificar_Estoque():
+    '''Busca um produto pelo id e verifica se ele está em estoque ou não'''
     for id, v in produtos.items():
         print(f"{id} | {v['nome']} ... R$ {v['preco']:.2f}")
     produto = buscarProduto()
@@ -76,6 +81,7 @@ def verificar_Estoque():
 
 
 def atualizar_Produto():
+    '''Busca um produto pelo id e permite atualizar o nome, preço ou estoque do produto'''
     produto = buscarProduto()
     if produto:
         print("Digite o que deseja alterar: (numero)")
@@ -102,6 +108,7 @@ def atualizar_Produto():
 
 
 def atualizar_Nome_Produto(produto):
+    '''Atualiza o nome do produto'''
     print(f"Nome atual: {produto['nome']}")
     produto["nome"] = input("Digite o novo nome do produto: ")
     print("Lista atualizada: ")
@@ -110,6 +117,7 @@ def atualizar_Nome_Produto(produto):
 
 
 def atualizar_Preco_Produto(produto):
+    '''Atualiza o preço do produto'''
     print(f"Preço atual: {produto['preco']}")
     preco = input("Digite o novo preço do produto: ")
     try:
@@ -122,6 +130,7 @@ def atualizar_Preco_Produto(produto):
 
 
 def atualizar_Estoque_Produto(produto):
+    '''Altera o estoque do produto para o valor oposto do atual'''
     produto["estoque"] = not produto["estoque"]
     print("Produto atualizado com sucesso")
     listarProdutos(produtos)
@@ -132,6 +141,7 @@ def atualizar_Estoque_Produto(produto):
 
 
 def removerProduto():
+    '''Busca um produto pelo id e remove o produto encontrado da lista de produtos'''
     busca = input("Digite o id do produto que deseja remover: ")
     try:
         busca = int(busca)

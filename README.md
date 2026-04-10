@@ -15,7 +15,8 @@ Built with Python, using hash maps (dictionaries) for efficient O(1) data access
 - [x] Implement remove product function
 - [ ] Add data persistence (save to file)
 - [ ] Improve input validation
-- [ ] Document code with comments ( because it's a good practice )
+- [x] Document code with comments ( because it's a good practice )
 - [ ] (Maybe) Reindex product IDs after removal (O(n) — intentional, for learning purposes)
+- [ ] Allow user to cancel any operation by typing 0
 
 
