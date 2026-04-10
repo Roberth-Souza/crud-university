@@ -12,6 +12,6 @@ Built with Python, using hash maps (dictionaries) for efficient O(1) data access
 - Basic error handling for invalid inputs
 
 ## TODO
-- [ ] Implement remove product function
+- [x] Implement remove product function
 - [ ] Add data persistence (save to file)
 - [ ] Improve input validation
