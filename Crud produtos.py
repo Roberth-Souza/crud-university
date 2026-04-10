@@ -26,12 +26,15 @@ id_Produto = 3
 
 def buscarProduto():
     '''Busca um produto pelo id e retorna o produto encontrado ou False caso não encontre'''
-    busca = input("Digite o id do produto que deseja buscar/alterar: ")
+    busca = input("Digite o id do produto que deseja buscar/alterar ou 0 para cancelar: ")
     try:
         busca = int(busca)
     except ValueError:
         print("Digite somente numeros")
         return
+    if busca == 0:
+        print("Operação cancelada")
+        return False
     if busca in produtos:
         print("Produto encontrado")
         return produtos[busca]
@@ -52,12 +55,29 @@ def adicionarProduto():
     , caso o produto já exista ele atualiza o estoque para True'''
     global id_Produto
     nome = input("Digite o nome do produto: ")
+    try:
+        nome = int(nome)
+        print('O nome do produto não pode ser um número')
+        return
+    except ValueError:
+        pass
+    if not nome:
+        print("O nome do produto não pode ser vazio")
+        return
     for e in produtos.values():
         if e["nome"] == nome:
             e["estoque"] = True
             print("Estoque atualizado com sucesso")
             return
-    preco = float(input("Digite o preco do produto: "))
+    preco = input("Digite o preco do produto: ")
+    try:
+        preco = float(preco)
+    except ValueError:
+        print('Digite o valor em reais "n.xx" ')
+        return
+    if preco <= 0:
+        print("O preço do produto deve ser um valor positivo")
+        return
     produto = {"nome": nome, "preco": preco, "estoque": True}
     id_Produto += 1
     produtos[id_Produto] = produto
@@ -68,8 +88,8 @@ def adicionarProduto():
 
 def verificar_Estoque():
     '''Busca um produto pelo id e verifica se ele está em estoque ou não'''
-    for id, v in produtos.items():
-        print(f"{id} | {v['nome']} ... R$ {v['preco']:.2f}")
+    for produto_id, v in produtos.items():
+        print(f"{produto_id} | {v['nome']} ... R$ {v['preco']:.2f}")
     produto = buscarProduto()
     if produto:
         print(
@@ -88,6 +108,7 @@ def atualizar_Produto():
         print("1 - Nome")
         print("2 - Preco")
         print("3 - Estoque")
+        print("0 - Cancelar")
         escolha = input("Digite a opção desejada: ")
         try:
             escolha = int(escolha)
@@ -95,10 +116,13 @@ def atualizar_Produto():
             print("Digite somente numeros")
             return
 
-        if escolha not in range(1, 4):
+        if escolha not in range(0, 4):
             print("Opcao nao encontrada")
             return
-
+        
+        elif escolha == 0:
+            print("Operação cancelada")
+            return
         elif escolha == 1:
             atualizar_Nome_Produto(produto)
         elif escolha == 2:
@@ -125,6 +149,9 @@ def atualizar_Preco_Produto(produto):
     except ValueError:
         print('Digite o valor em reais "n.xx" ')
         return
+    if preco <= 0:
+        print("O preço do produto deve ser um valor positivo")
+        return
     produto["preco"] = preco
     listarProdutos(produtos)
 
@@ -134,7 +161,6 @@ def atualizar_Estoque_Produto(produto):
     produto["estoque"] = not produto["estoque"]
     print("Produto atualizado com sucesso")
     listarProdutos(produtos)
-    print("Produto atualizado com sucesso")
 
 
 #### * Remover produtos:
@@ -142,11 +168,14 @@ def atualizar_Estoque_Produto(produto):
 
 def removerProduto():
     '''Busca um produto pelo id e remove o produto encontrado da lista de produtos'''
-    busca = input("Digite o id do produto que deseja remover: ")
+    busca = input("Digite o id do produto que deseja remover ou 0 para cancelar: ")
     try:
         busca = int(busca)
     except ValueError:
         print("Digite somente numeros")
+        return
+    if busca == 0:
+        print("Operação cancelada")
         return
     if busca in produtos:
         del produtos[busca]
