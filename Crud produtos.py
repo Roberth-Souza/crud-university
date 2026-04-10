@@ -132,7 +132,18 @@ def atualizar_Estoque_Produto(produto):
 
 
 def removerProduto():
-    return
+    busca = input("Digite o id do produto que deseja remover: ")
+    try:
+        busca = int(busca)
+    except ValueError:
+        print("Digite somente numeros")
+        return
+    if busca in produtos.keys():
+        del produtos[busca]
+        print("Produto removido com sucesso")
+        listarProdutos(produtos)
+    else:
+        print("Produto não encontrado")
 
 
 #### * MENU ---------
