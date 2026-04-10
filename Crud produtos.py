@@ -31,7 +31,7 @@ def buscarProduto():
     except ValueError:
         print("Digite somente numeros")
         return
-    if busca in produtos.keys():
+    if busca in produtos:
         print("Produto encontrado")
         return produtos[busca]
     print("Produto não encontrado")
@@ -138,7 +138,7 @@ def removerProduto():
     except ValueError:
         print("Digite somente numeros")
         return
-    if busca in produtos.keys():
+    if busca in produtos:
         del produtos[busca]
         print("Produto removido com sucesso")
         listarProdutos(produtos)
@@ -187,7 +187,8 @@ while opcao != "0":
     elif opcao == "5":
         print("REMOVER PRODUTO ========================")
         listarProdutos(produtos)
-
+        removerProduto()
+        
     elif opcao is not None:
         print("Opção não existe")
 
