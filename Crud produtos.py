@@ -54,7 +54,10 @@ def adicionarProduto():
     '''Adiciona um produto a fornecido pelo usuario na lista de produtos
     , caso o produto já exista ele atualiza o estoque para True'''
     global id_Produto
-    nome = input("Digite o nome do produto: ")
+    nome = input("Digite o nome do produto, ou 0 para cancelar: ")
+    if nome == "0":
+        print("Operação cancelada")
+        return
     try:
         nome = int(nome)
         print('O nome do produto não pode ser um número')
@@ -69,7 +72,7 @@ def adicionarProduto():
             e["estoque"] = True
             print("Estoque atualizado com sucesso")
             return
-    preco = input("Digite o preco do produto: ")
+    preco = input("Digite o preco do produto ")
     try:
         preco = float(preco)
     except ValueError:
